@@ -1,0 +1,39 @@
+minecraftServer:
+  difficulty: hard
+  whitelist: |
+    A_Cubed3
+    MasterOfCubesAU
+    FawnCobra
+    jl58261
+    saiderman
+    Elemental_Se
+    sz1357
+  ops: |
+    MasterOfCubesAU
+    A_Cubed3
+  eula: true
+  icon: https://mocbot.masterofcubesau.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.4a07ee92.png&w=256&q=75
+  motd: "MOCServers | Vanilla MC %VERSION%"
+  serviceType: LoadBalancer
+
+resources:
+  requests:
+    memory: 4096Mi
+    cpu: 500m
+
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - preference:
+        matchExpressions:
+        - key: new-node
+          operator: In
+          values:
+          - "true"
+      weight: 100
+
+persistence:
+  dataDir:
+    enabled: true
+    existingClaim: mc-server-minecraft-data-longhorn
+

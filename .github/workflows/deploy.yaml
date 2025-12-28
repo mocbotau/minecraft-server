@@ -1,0 +1,9 @@
+name: Provision Minecraft Server
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    uses: mocbotau/infra-workflows/.github/workflows/generic-infra-deploy.yaml@v0.5.0
+    secrets: inherit
