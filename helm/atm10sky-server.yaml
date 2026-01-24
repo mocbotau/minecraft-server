@@ -1,28 +1,39 @@
 minecraftServer:
-  difficulty: hard
+  difficulty: normal
   whitelist: |
     A_Cubed3
     MasterOfCubesAU
-    FawnCobra
     jl58261
     saiderman
-    Elemental_Se
-    sz1357
-    Eloiserebecxa
-    Shamrold
+    FawnCobra
+    TR_Llama
   ops: |
     MasterOfCubesAU
-    A_Cubed3
   eula: true
   icon: https://mocbot.masterofcubesau.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.4a07ee92.png&w=256&q=75
   motd: |
     \u00A74\u00A7lMOCServers | Minecraft\u00A7r\u00A7r
-    Playing %TYPE% \u00A7b%VERSION%\u00A7r
+    Playing %MODPACK_NAME% version %MODPACK_VERSION% \u00A7bMC %VERSION%\u00A7r
   serviceType: LoadBalancer
+  memory: 8192M
+  type: AUTO_CURSEFORGE
+  servicePort: 6969
+  levelType: skyblockbuilder:skyblock
+  autoCurseForge:
+    slug: all-the-mods-10-sky
+    apiKey:
+      existingSecret: curseforge-api-key
+      key: CF_API_KEY
+
+extraEnv:
+  ALLOW_FLIGHT: "TRUE"
+
+livenessProbe:
+  initialDelaySeconds: 180
 
 resources:
   requests:
-    memory: 4096Mi
+    memory: 8192Mi
     cpu: 500m
 
 affinity:
@@ -37,6 +48,8 @@ affinity:
       weight: 100
 
 persistence:
+  storageClassName: "longhorn"
   dataDir:
+    Size: 5Gi
     enabled: true
-    existingClaim: mc-server-minecraft-data-longhorn
+

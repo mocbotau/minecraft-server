@@ -1,0 +1,39 @@
+repositories:
+  - name: minecraft-server-charts
+    url: https://itzg.github.io/minecraft-server-charts
+  - name: chartmuseum
+    url: https://chartmuseum.masterofcubesau.com
+    username: {{ requiredEnv "CHARTMUSEUM_USER" }}
+    password: {{ requiredEnv "CHARTMUSEUM_PASS" }}
+
+
+helmDefaults:
+  atomic: true
+  cleanupOnFail: true
+  createNamespace: true
+  timeout: 300
+  wait: true
+  waitForJobs: true
+
+releases:
+  - name: mc-server
+    namespace: vanilla-mc
+    chart: minecraft-server-charts/minecraft
+    version: 5.0.0
+    values:
+      - helm/mc-server.yaml
+  - name: atm10sky-server
+    namespace: atm10sky-mc
+    chart: minecraft-server-charts/minecraft
+    version: 5.0.0
+    values:
+      - helm/atm10sky-server.yaml
+    needs:
+      - atm10sky-server-secrets
+
+  - name: atm10sky-server-secrets
+    namespace: atm10sky-mc
+    chart: chartmuseum/infisical-secret
+    version: 0.1.0
+    values:
+      - helm/secrets/values.yaml
