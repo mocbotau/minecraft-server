@@ -1,0 +1,39 @@
+minecraftServer:
+  difficulty: hard
+  whitelist: |
+    MasterOfCubesAU
+    Eloiserebecxa
+    Shamrold
+  ops: |
+    MasterOfCubesAU
+    Shamrold
+  eula: true
+  icon: https://mocbot.masterofcubesau.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.4a07ee92.png&w=256&q=75
+  motd: |
+    \u00A74\u00A7lSwineberries\u00A7r\u00A7r
+    Playing %TYPE% \u00A7b%VERSION%\u00A7r
+  serviceType: LoadBalancer
+  servicePort: 1707
+  downloadWorldUrl: https://fileshare.masterofcubesau.com/a7f29bab
+
+resources:
+  requests:
+    memory: 4096Mi
+    cpu: 500m
+
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - preference:
+        matchExpressions:
+        - key: new-node
+          operator: In
+          values:
+          - "true"
+      weight: 100
+
+persistence:
+  storageClassName: "longhorn"
+  dataDir:
+    Size: 5Gi
+    enabled: true

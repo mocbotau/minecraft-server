@@ -22,6 +22,12 @@ releases:
     version: 5.0.0
     values:
       - helm/mc-server.yaml
+  - name: mc-server-swineberries
+    namespace: vanilla-mc-swineberries
+    chart: minecraft-server-charts/minecraft
+    version: 5.0.0
+    values:
+      - helm/mc-server-swineberries.yaml
   - name: atm10sky-server
     namespace: atm10sky-mc
     chart: minecraft-server-charts/minecraft
@@ -30,7 +36,6 @@ releases:
       - helm/atm10sky-server.yaml
     needs:
       - atm10sky-server-secrets
-
   - name: atm10sky-server-secrets
     namespace: atm10sky-mc
     chart: chartmuseum/infisical-secret
