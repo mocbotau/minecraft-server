@@ -22,6 +22,12 @@ releases:
     version: 5.0.0
     values:
       - helm/mc-server.yaml
+  - name: packers-mc
+    namespace: packers-mc
+    chart: minecraft-server-charts/minecraft
+    version: 5.0.0
+    values:
+      - helm/packers.yaml
   - name: atm10sky-server
     namespace: atm10sky-mc
     chart: minecraft-server-charts/minecraft
