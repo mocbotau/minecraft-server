@@ -1,0 +1,21 @@
+resources:
+  requests:
+    memory: 1024Mi
+    cpu: 500m
+
+minecraftServer:
+  eula: "TRUE"
+  version: "LATEST"
+  difficulty: easy
+  whitelistUsers: "StLincon,MuchCookie1647"
+  ops: "2535437992121715"
+  cheats: true
+  viewDistance: 12
+  serviceType: LoadBalancer
+  serverPort: 8080
+
+persistence:
+  storageClassName: "longhorn"
+  dataDir:
+    enabled: true
+    Size: 2Gi
